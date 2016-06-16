@@ -1,2 +1,2 @@
 # Html
-demo:1.ajaxreq.applinzi.com/ajaxreq/viewpager(div轮播)
+demo:http://www.1.ajaxreq.applinzi.com/ajaxreq/viewpager(div轮播)
