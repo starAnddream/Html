@@ -1,0 +1,80 @@
+a, address, b, big, blockquote, body, center, cite, code, dd, del, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+body {
+    font: 12px/150% Arial,Verdana,"\5b8b\4f53";
+    color: #666;
+    background: #fff;
+}
+.head {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: #F1F1F1;
+}
+.w1210 {
+    width: 1210px;
+    margin: 0 auto;
+}
+.fl{
+    float: left;
+}
+ol, ul {
+    list-style: none;
+}
+.dropdown {
+    width: 301px;
+    padding: 10px 0 10px 10px;
+    top: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    line-height: 24px;
+}
+.dropdown ul li{
+    float: left;
+    width: 60px;
+    padding: 2px 0;
+}
+.dropdown ul li {
+    line-height: 24px;
+}
+.dropdown ul li a {
+    float: left;
+    padding: 0 8px;
+}
+.dropdown ul li a.selected {
+    background: #C81623;
+    color: #fff;
+}
+.dropdown ul li a:hover {
+    background: #F1F1F1;
+    color:  #C81623;
+}
+
+.dropdown {
+    -webkit-transition: all 600ms cubic-bezier(0.23,1,.32,1);
+}
+.dropdown {
+    display: none;
+    position: absolute;
+}
+.hover .dropdown {
+    display: block;
+    margin-top: -1px;
+}
+.hover .drop-title {
+    padding: 0 24px 0 9px;
+    background: #ffffff;
+    border: solid #dddddd;
+    border-width: 0 1px;
+}
+.drop-title {
+    padding: 0 25px 0 10px;
+    z-index: 10;
+    position: absolute;
+}
