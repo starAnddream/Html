@@ -1,0 +1,128 @@
+html,body{
+	margin:0px;
+	padding:0px;
+	font-family: Helvetica, sans-serif;
+}
+.animation{
+  width:50%;
+  text-align:center;
+  position:relative;
+  height:377px;
+  margin:0 auto;
+  vertical-align:middle;
+}
+.animation .device{
+  position:absolute;
+  width:100%;
+  height:100%;
+  left: 50%;
+  top: 50%;
+  background: #111;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.animation .device .screen-stand{
+	
+	width:100%;
+	height:20%;
+	position:absolute;
+      z-index: 1;
+      -webkit-transition: all 0.4s ease-out;
+      -moz-transition: all 0.4s ease-out;
+      -ms-transition: all 0.4s ease-out;
+      transition: all 0.4s ease-out; 
+}
+.animation .device .display{
+	height:100%;
+	position: relative;
+	width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #34495e;
+      z-index: 3; 
+	
+}
+.slide1,.slide2,.slide3{
+	 position: absolute;
+	padding-top:40%;
+	display:none;
+	width:100%;
+	color: #fff;
+	left:50%;
+	 transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+	}
+.animation[data-animation-step="1"] .leg{
+	position:absolute;
+	background: #111;
+	width:12px;
+	height: 70px;
+	top:245px;
+	left:50%;
+}
+.animation[data-animation-step="1"] .foot{
+	position:absolute;
+	background:black;
+	width:120px;
+	height:8px;
+	top:310px;
+	left:37%;
+}
+.animation[data-animation-step="1"] .device{
+	width: 70%;
+    height: 60%;
+	border-radius:4px;
+}
+.animation[data-animation-step="1"] .slide1{
+
+	display:block;
+}
+.animation[data-animation-step="1"] .display{
+		background: #34495e;
+		border:10px solid black;
+		border-radius:5px;
+}
+.animation[data-animation-step="2"] .device {
+    width: 45%;
+    height: 72%;
+	border-radius: 10px;
+}
+.animation[data-animation-step="2"] .slide2{
+	display:block;
+	
+}
+.animation[data-animation-step="2"] .display{
+	background: #16a085;
+	border:20px solid black;
+	border-radius:10px;
+    
+}
+.animation[data-animation-step="3"] .device {
+    width: 54%;
+    height: 38%;
+	border-radius: 6px;
+}
+.animation[data-animation-step="3"] .slide3{
+	display:block;
+	
+}
+.animation[data-animation-step="3"] .display{
+	background: #3498db;
+	border-top:10px solid black;
+	border-bottom:10px solid black;
+	border-left:20px solid black;
+	border-right:20px solid black;
+	border-radius:8px;
+}
+
+
+
+
+
+
+
