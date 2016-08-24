@@ -1,0 +1,124 @@
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+ table{
+ height:20px;
+ width:90%;
+ margin:10px;
+ margin-left:5%;
+ border-collapse:collapse;
+ }
+ td{
+ border:1px solid black;
+ height:20px;
+ }
+ #low,#high{
+ background:lightgray;
+ }
+ #mid{
+ background:green;
+ }
+</style>
+</head>
+<body>
+<title>thinking a number</title>
+<h1 id="heading">你思考一个数字</h1>
+<table>
+   <tr>
+   <td id="low"></td><td id="mid"></td><td id="high"></td>
+   </tr>
+</table>
+
+<label id="prompt"></label><input id="input" type="text"/>
+<script>
+window.onload=newgame;
+window.onpopstate=popState;
+var state,ui;
+function newgame(playagain){
+playagain ? true:false;
+//console.log(playagain);
+ui={
+  heading:null,
+  prompt:null,
+  input:null,
+  low:null,
+  mid:null,
+  high:null
+};
+for(id in ui) ui[id]=document.getElementById(id);
+ui.input.onchange=handleGuess;
+state={
+  n:Math.floor(Math.random()*99+1),
+  low:0,
+  high:100,
+  guesstimes:0,
+  guess:undefined
+};
+display(state);
+if(playagain === true) save(state);
+}
+
+function save(state){
+   if(!history.pushState)return;
+   var url="#guess"+state.guesstimes;
+   history.pushState(state,"",url);
+}
+function popState(event){
+   if(event.state){
+   console.log(event);
+   state=event.state;
+   display(state);
+   }
+   else{
+   console.log(2222);
+   history.replaceState(state,"","#guess"+state.guesstimes);
+   }
+}
+function handleGuess(){
+   var g=parseInt(this.value);
+   if((g > state.low)&&(g< state.high)){
+      if(g < state.n) state.low=g;
+	   else if(g > state.n) state.high=g;
+	   state.guess=g;
+	   state.guesstimes++;
+	   save(state);
+	   display(state);
+   }else{
+   alert("Please enter a number greater than"+state.low+"and less than"+state.high);
+   }
+}
+function display(state){
+
+   ui.heading.innerHTML="I'm thinking a number between"+state.low+"and"+state.high;
+   ui.low.style.width=state.low+"%";
+   ui.mid.style.width=state.high-state.low+"%";
+   ui.high.style.width=(100-state.high)+"%";
+   ui.input.style.visibility="visible";
+   ui.input.value="";
+   ui.input.focus();
+
+if(state.guess === undefined)
+   {
+   ui.prompt.innerHTML="请输入一个数字";
+   }
+   
+   else if(state.guess < state.n)
+    {
+	
+	ui.prompt.innerHTML="太小";
+	}
+	else if(state.guess > state.n)
+    {
+	
+	ui.prompt.innerHTML="太大";
+    }else{
+	
+	ui.input.style.visibility="hidden";
+	ui.heading.innerHTML="正确";
+	ui.prompt.innerHTML="恭喜你<button onclick='newgame(true)'>Play again</button>";
+	}
+	}
+</script>
+</body>
+</html>
