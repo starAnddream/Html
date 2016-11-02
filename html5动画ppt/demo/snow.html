@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下雪</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		#box{
+			margin:0 auto;
+			width: 600px;
+			position: relative;
+		}
+		#fcan{
+			position: absolute;
+			top: 0;
+			z-index: 100;
+		}
+		#bg{
+			position: absolute;
+			top: 0;
+		}
+		#bg img{
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<canvas id="fcan" width="600" height="400" style="border:1px solid #333;opacity: 0.6;"></canvas>
+		<div id="bg"><img src="http://tupian.enterdesk.com/2013/xll/012/30/3/1.jpg" alt=""></div>
+	</div>
+	<script>
+		var rains=[];
+		var can=document.getElementById('fcan');
+		var ct=can.getContext('2d');
+		init();
+		
+		setInterval(function(){
+			createRain();
+			ct.clearRect(0,0,600,400);//每次重新画雪花都需要清除画布，你可以注释一下看看
+			//它就变成一条柱子了，这个语句很重要！
+			//init();//这里没必要把初始化写到循环定时器里面
+			dropDown();
+		},50);
+		//初始化
+		function init(){
+			ct.rect(0,0,600,400);//画矩形
+			ct.fillStyle='#000';
+			ct.fill();
+		}
+		//产生随机雨滴
+		function createRain(){
+			var ix=Math.random()*600;
+			var iy=Math.random()*50;
+			var ir=Math.random()*4;
+			var ivy=Math.random()*5+2;
+			var rain={
+				x:ix,     //雪花的x坐标
+				y:iy,     //雪花的Y坐标
+				r:ir,     //雪花的半径大小
+				vy:ivy  //每隔50ms雪花下移的位置
+				//g:8    //多余
+			};
+			rains.push(rain);
+		}
+	
+		//落下
+		function dropDown(){
+			var len=rains.length;
+			for(var i=0;i<len;i++){
+				drawRain(rains[i].x,rains[i].y,rains[i].r,ct);
+				//rains[i].v+=rains[i].g;
+				rains[i].y+=rains[i].vy; //需要让雪花下移
+			}
+			//理解rains是关键，他是一个数组，数组元素为对象，对象的属性在动态的改变
+		//console.log(rains.length);
+		}
+		//画雪花
+		function drawRain(x,y,r,obj){
+			obj.fillStyle='#fff';
+			obj.beginPath();
+			obj.arc(x,y,r,0,Math.PI*2,true);//画雪花，arc(x,y,r,start,end,true)
+			//x,y圆心坐标，r为半径，start为起始弧度，end为结束弧度，true为逆时针画
+			obj.closePath();
+			obj.fill();
+		}
+	</script>
+</body>
+</html>

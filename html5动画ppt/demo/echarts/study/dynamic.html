@@ -1,0 +1,102 @@
+<body>
+<meta charset="utf-8">
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+
+<script src="../echarts.js"></script>
+<!--><script src="./data.js"></script><!-->
+</body>
+<script>
+var myChart = echarts.init(document.getElementById('main'));
+var base = +new Date(2014, 9, 3);
+//console.log(new Date(2014,12,3));
+//console.log(base);
+var oneDay = 24 * 3600 * 1000;
+var date = [];
+
+var data = [Math.random() * 150];
+var now = new Date(base);
+console.log(now);
+
+function addData(shift) {
+    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+    date.push(now);
+    data.push((Math.random()) * 100);
+
+    if (shift) {
+	//console.log(1);
+        date.shift();
+        data.shift();
+    }
+
+    now = new Date(+new Date(now) + oneDay);
+}
+
+/*myChart.setOption({
+    title: {
+        text: '数据动态加载'
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        data: []
+    },
+    yAxis: {},
+    series: [{
+        name: '销量',
+        type: 'line',
+        data: []
+    }]
+});*/
+myChart.setOption({
+    title: {
+        text: '数据动态加载'
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: true,
+        data: date
+    },
+    yAxis: {
+        boundaryGap: ['0%', '30%'],
+        type: 'value'
+    },
+    series: [
+        {
+            name:'成交',
+            type:'line',
+            smooth:true,
+            symbol: 'none',
+            stack: 'a',
+            areaStyle: {
+                normal: {}
+            },
+            data: data
+        }
+    ]
+});
+
+var timeTicket = setInterval(function () {
+    addData(true);
+    myChart.setOption({
+        xAxis: {
+            data: date
+        },
+        series: [{
+            data: data
+        }]
+    });
+}, 100);
+
+for (var i = 1; i < 100; i++) {
+    addData();
+}
+//clearInterval(timeTicket);
+//myChart.setOption(option);
+</script>
